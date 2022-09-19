@@ -1,0 +1,18 @@
+{
+  "name": "hardhat-project",
+  "scripts": {
+    "deploy": "node scripts/deploy.js",
+    "sign": "hardhat run scripts/sign.js --network mumbai",
+    "relay": "node scripts/relay.js"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "hardhat": "^2.11.2"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3",
+    "defender-relay-client": "^1.31.1",
+    "dotenv": "^16.0.2",
+    "eth-sig-util": "^3.0.1"
+  }
+}
