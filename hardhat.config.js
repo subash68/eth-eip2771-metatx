@@ -6,6 +6,7 @@ const POLYGON_MUMBAI_GATEWAY_URL = process.env.POLYGON_MUMBAI_GATEWAY_URL;
 
 const ETHEREUM_PRIVATE_KEY_RINKEBY = process.env.ETHEREUM_PRIVATE_KEY_RINKEBY;
 const RINKEBY_GATEWAY_URL = process.env.RINKEBY_GATEWAY_URL;
+const GOERLI_GATEWAY_URL = process.env.GOERLI_GATEWAY_URL;
 
 const POLYGON_ACCOUNT_KEY = process.env.POLYGON_TESTNET_ACCOUNT;
 const ETHEREUM_ACCOUNT_KEY = process.env.ETHEREUM_TESTNET_ACCOUNT;
@@ -20,6 +21,11 @@ module.exports = {
     },
     rinkeby: {
       url: RINKEBY_GATEWAY_URL,
+      accounts: [ETHEREUM_ACCOUNT_KEY],
+      etherscan: { apiKey: process.env.API_KEY_ETHERSCAN },
+    },
+    goerli: {
+      url: GOERLI_GATEWAY_URL,
       accounts: [ETHEREUM_ACCOUNT_KEY],
       etherscan: { apiKey: process.env.API_KEY_ETHERSCAN },
     },

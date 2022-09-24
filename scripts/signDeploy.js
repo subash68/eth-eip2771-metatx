@@ -2,28 +2,24 @@ const { ethers } = require("hardhat");
 const { signMetaTxRequest } = require("../src/signer");
 const { readFileSync, writeFileSync } = require("fs");
 
-const DEFAULT_GREETING = "Boom Boom !";
-
 function getInstance(name) {
-  const address = JSON.parse(readFileSync("deployments/deploy.json"))[name];
+  const address = JSON.parse(readFileSync("deployments/deployFactory.json"))[
+    name
+  ];
   if (!address) throw new Error(`Contract ${name} not found in deploy.json`);
   return ethers.getContractFactory(name).then((f) => f.attach(address));
 }
 
 async function main() {
   const forwarder = await getInstance("MinimalForwarder");
-  const greeting = await getInstance("Greeting");
-
-  const { GREET: _greeting, PRIVATE_KEY: signer } = process.env;
+  const factory = await getInstance("GreetingFactory");
+  const { PRIVATE_KEY: signer } = process.env;
   const from = new ethers.Wallet(signer).address;
-  console.log(
-    `Signing registration of ${_greeting || DEFAULT_GREETING} as ${from}...`
-  );
-  const data = greeting.interface.encodeFunctionData("setGreeting", [
-    _greeting || DEFAULT_GREETING,
+  const data = factory.interface.encodeFunctionData("cloneContract", [
+    "Sample greeting",
   ]);
   const result = await signMetaTxRequest(signer, forwarder, {
-    to: greeting.address,
+    to: factory.address,
     from,
     data,
   });

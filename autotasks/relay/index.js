@@ -5,8 +5,9 @@ const {
 } = require("defender-relay-client/lib/ethers");
 
 const { ForwarderAbi } = require("../../src/forwarder");
-const ForwarderAddress = require("../../deploy.json").MinimalForwarder;
-const GreetingAddress = require("../../deploy.json").Greeting;
+const ForwarderAddress =
+  require("../../deployments/deployFactory.json").MinimalForwarder;
+// const GreetingAddress = require("../../deployments/deployFactory.json").GreetingFactory;
 
 async function relay(forwarder, request, signature, whitelist) {
   // Decide if we want to relay this request based on a whitelist
